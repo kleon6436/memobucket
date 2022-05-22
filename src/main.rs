@@ -19,6 +19,7 @@ enum Commands {
     Read { file_path: Option<String> },
 
     // Show memo
+    #[clap(about="Show memo.")]
     Show,
 }
 
