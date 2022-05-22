@@ -16,7 +16,10 @@ enum Commands {
 
     // Read memo from file.
     #[clap(about="Read memo from file.")]
-    Read,
+    Read { file_path: Option<String> },
+
+    // Show memo
+    Show,
 }
 
 fn main() {
@@ -26,8 +29,11 @@ fn main() {
         Commands::Add { message } => {
             println!("test: {:?}", &message)
         }
-        Commands::Read => {
-            println!("Read memo.")
+        Commands::Read { file_path } => {
+            println!("FilePath: {:?}", &file_path)
+        }
+        Commands::Show => {
+            println!("Show memo")
         }
     }
 }
