@@ -24,9 +24,12 @@ enum Commands {
     Show,
 }
 
+// Log file path
+const LOG_FILE_PATH: &str = "memobucket.md";
+
 fn main() {
     let args = Args::parse();
-    let log_file_manager = log_file_manager::LogFileManager::new("test.txt");
+    let log_file_manager = log_file_manager::LogFileManager::new(LOG_FILE_PATH);
 
     match &args.commands {
         Commands::Add { message } => {           
