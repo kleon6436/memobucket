@@ -26,11 +26,10 @@ enum Commands {
 
 fn main() {
     let args = Args::parse();
+    let log_file_manager = log_file_manager::LogFileManager::new("test.txt");
 
     match &args.commands {
-        Commands::Add { message } => {
-            let log_file_manager = log_file_manager::LogFileManager::new("test.txt");
-            
+        Commands::Add { message } => {           
             if let Some(message) = message {
                 log_file_manager.write_log(message)
             } else {
@@ -38,10 +37,15 @@ fn main() {
             };
         }
         Commands::Read { file_path } => {
-            println!("FilePath: {:?}", &file_path)
+            if let Some(file_path) = file_path {
+                log_file_manager.read_log(file_path);
+            } else {
+                println!("Log file is not found.");
+                println!("Please check log file path.");
+            }
         }
         Commands::Show => {
-            println!("Show memo")
+            log_file_manager.show_log();
         }
     }
 }
