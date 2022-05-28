@@ -1,4 +1,5 @@
 use clap::{Parser, Subcommand};
+use memobucket::log_file_manager;
 
 #[derive(Parser)]
 #[clap(author, version, about, long_about = None)]
@@ -28,7 +29,13 @@ fn main() {
 
     match &args.commands {
         Commands::Add { message } => {
-            println!("test: {:?}", &message)
+            let log_file_manager = log_file_manager::LogFileManager::new("test.txt");
+            
+            if let Some(message) = message {
+                log_file_manager.write_log(message)
+            } else {
+                println!("Please set some message.")
+            };
         }
         Commands::Read { file_path } => {
             println!("FilePath: {:?}", &file_path)
